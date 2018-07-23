@@ -7,11 +7,11 @@ class Config
   FLUENTD = :flunetd.freeze
 
   def load_config config_path
-    config = YAML.load_file config_path
+    @config = YAML.load_file config_path
   end
 
   def [](key)
-    config = config || sample
+    config = @config || sample
     config[key.to_s]
   end
 
@@ -27,9 +27,9 @@ class Config
 
   def sample
     hash = {
-      fluentd_host: 'localhost',
-      fluentd_port: '24224',
-      tag: 'event'
+      'fluentd_host' => 'localhost',
+      'fluentd_port' => '24224',
+      'tag' => 'event'
     }
   end
 end

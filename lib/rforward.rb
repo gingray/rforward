@@ -4,6 +4,7 @@ require 'yaml'
 require 'json'
 require 'dry-container'
 require "rforward/exceptions"
+require "rforward/stat"
 require "rforward/rlogger"
 require "rforward/directory_processor"
 require "rforward/file_processor"
@@ -17,6 +18,7 @@ module Rforward
     def process_logs path, ext=".log"
       check_config
       dependencies
+      DirectoryProcessor.call path, ext
       RLogger.instance.info "#{path} logs extensions #{ext}"
     rescue ConfigNotFoundEx => e
       RLogger.instance.error e.message
@@ -31,7 +33,7 @@ module Rforward
 
     private
     def check_config
-      raise ConfigNotFoundEx, path unless config_path.file? && config_path.exist?
+      raise ConfigNotFoundEx, config_path.to_path unless config_path.file? && config_path.exist?
       Config.instance.load_config config_path
     end
 
@@ -41,7 +43,7 @@ module Rforward
 
     def dependencies
       Config.register Config::FLUENTD do
-        host, port, tag = Config.instance[:host], Config.instance[:port], Config.instance[:tag]
+        host, port, tag = Config.instance[:fluentd_host], Config.instance[:fluentd_port], Config.instance[:tag]
         Fluent::Logger::FluentLogger.new(nil, host: host, port: port.to_i)
       end
     end

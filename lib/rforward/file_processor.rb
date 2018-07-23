@@ -6,9 +6,13 @@ class FileProcessor
   end
 
   def call
+    RLogger.instance.info "start working on #{filepath}"
     File.readlines(filepath).each do |line|
       line_processor.call line
     end
+    Stat.instance.files_current += 1
+    RLogger.instance.info "finish working on #{filepath}"
+    RLogger.instance.stat
   end
 
   def self.call filepath

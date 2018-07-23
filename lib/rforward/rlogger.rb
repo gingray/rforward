@@ -8,4 +8,8 @@ class RLogger
   def error msg
     puts "[ERROR] #{msg}"
   end
+
+  def stat
+    puts Stat.instance
+  end
 end
