@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require "rforward"
+ENV['ROOT_PATH'] = File.expand_path("../", __FILE__)
+Rforward::CLI.start(ARGV)

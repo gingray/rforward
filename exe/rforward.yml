@@ -1,0 +1,4 @@
+---
+:fluentd_host: localhost
+:fluentd_port: '24224'
+:tag: event
