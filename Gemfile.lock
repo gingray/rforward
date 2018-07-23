@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rforward (0.1.4)
+    rforward (0.1.5)
       dry-container
       fluent-logger
       thor (~> 0.20)

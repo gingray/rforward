@@ -9,6 +9,7 @@ class DirectoryProcessor
 
   def call
     files_arr = Dir["#{path}/**#{ext}"]
+    files_arr = files_arr.select { |file| File.file? file } 
     Stat.instance.files_total = files_arr.count
     files_arr.each do |filepath|
       FileProcessor.call filepath
