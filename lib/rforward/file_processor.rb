@@ -16,8 +16,9 @@ class FileProcessor
     delay
   end
 
+
   def delay
-    if Config.instance['flush_threshold'].to_i > Stat.instance.flush_counter
+    if Config.instance['flush_threshold'].to_i < Stat.instance.flush_counter
       RLogger.instance.info "Sleep for #{Config.instance['flush_delay']} seconds"
       sleep(Config.instance['flush_delay'].to_i)
       Stat.instance.flush_counter = 0

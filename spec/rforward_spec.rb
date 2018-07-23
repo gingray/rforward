@@ -24,4 +24,10 @@ RSpec.describe Rforward do
       end
     end
   end
+  describe FileProcessor do
+    context 'tag from filename' do
+      let(:filepath) { '/home/app/logs/fluentd_app.log.20171215_0_json.log' }
+      let(:processor) {FileProcessor.new filepath, nil }
+    end
+  end
 end

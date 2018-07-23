@@ -31,7 +31,10 @@ class Config
       'fluentd_port' => '24224',
       'tag' => 'event',
       'flush_delay' => '20',
-      'flush_threshold' => '100000'
+      'flush_threshold' => '100000',
+      'time_key' => 'time',
+      'time_format' => '%Y-%m-%dT%H:%M:%S%z',
+      'index_key' => 'index_key'
     }
   end
 end

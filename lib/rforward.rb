@@ -3,6 +3,7 @@ require 'singleton'
 require 'yaml'
 require 'json'
 require 'dry-container'
+require 'time'
 require "rforward/exceptions"
 require "rforward/stat"
 require "rforward/rlogger"
@@ -20,6 +21,8 @@ module Rforward
       dependencies
       DirectoryProcessor.call path, ext
       RLogger.instance.info "#{path} logs extensions #{ext}"
+      puts "Work finidhed press any key"
+      STDIN.gets
     rescue ConfigNotFoundEx => e
       RLogger.instance.error e.message
     end
