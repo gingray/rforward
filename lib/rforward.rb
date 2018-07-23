@@ -14,7 +14,7 @@ require 'thor'
 
 module Rforward
   class CLI < Thor
-    desc "Process JSON logs into Fluentd Forward", ""
+    desc "process_logs", "Process JSON logs into Fluentd Forward"
     def process_logs path, ext=".log"
       check_config
       dependencies
@@ -24,7 +24,7 @@ module Rforward
       RLogger.instance.error e.message
     end
 
-    desc "Create config file", ""
+    desc "create_config", "Create config file in current working directory"
     def create_config
       Config.instance.create_sample_config config_path
     rescue ConfigNotFoundEx => e

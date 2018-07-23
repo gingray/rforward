@@ -12,6 +12,7 @@ class FFluentdLine
     json = JSON.parse line
     @client.post Config.instance[:tag], json
     Stat.instance.success += 1
+    Stat.instance.flush_counter += 1
     true
   rescue Exception => e
     Stat.instance.failed += 1

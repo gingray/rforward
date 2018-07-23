@@ -1,9 +1,9 @@
 class Stat
   include Singleton
-  attr_accessor :success, :failed, :total, :files_total, :files_current
+  attr_accessor :success, :failed, :total, :files_total, :files_current, :flush_counter
 
   def initialize
-    @success, @failed, @total, @files_total, @files_current = 0, 0, 0, 0, 0
+    @success, @failed, @total, @files_total, @files_current, @flush_counter = 0, 0, 0, 0, 0, 0
   end
 
   def to_s

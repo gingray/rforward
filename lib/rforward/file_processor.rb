@@ -13,6 +13,15 @@ class FileProcessor
     Stat.instance.files_current += 1
     RLogger.instance.info "finish working on #{filepath}"
     RLogger.instance.stat
+    delay
+  end
+
+  def delay
+    if Config.instance['flush_threshold'].to_i > Stat.instance.flush_counter
+      RLogger.instance.info "Sleep for #{Config.instance['flush_delay']} seconds"
+      sleep(Config.instance['flush_delay'].to_i)
+      Stat.instance.flush_counter = 0
+    end
   end
 
   def self.call filepath

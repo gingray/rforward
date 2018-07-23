@@ -29,7 +29,9 @@ class Config
     hash = {
       'fluentd_host' => 'localhost',
       'fluentd_port' => '24224',
-      'tag' => 'event'
+      'tag' => 'event',
+      'flush_delay' => '20',
+      'flush_threshold' => '100000'
     }
   end
 end
