@@ -11,7 +11,6 @@ class FFluentdLine
     Stat.instance.total += 1
     json = JSON.parse line
     json = mutate json
-    puts json
     @client.post Config.instance[:tag], json
     Stat.instance.success += 1
     Stat.instance.flush_counter += 1
