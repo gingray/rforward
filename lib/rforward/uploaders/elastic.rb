@@ -37,9 +37,9 @@ module Rforward
       end
 
       def index_name record
-        return "#{@deafault_index_name}#{Time.now.strftime('%Y-%m')}" unless record[Config.instance['time_key']]
+        return "#{@default_index_name}#{Time.now.strftime('%Y-%m-%d')}" unless record[Config.instance['time_key']]
         time = Time.strptime record[Config.instance['time_key']], Config.instance['time_format']
-        "#{@deafault_index_name}#{time.strftime('%Y-%m')}"
+        "#{@default_index_name}#{time.strftime('%Y-%m-%d')}"
       end
     end
   end
