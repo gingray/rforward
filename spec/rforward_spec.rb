@@ -1,16 +1,21 @@
 RSpec.describe Rforward do
   before(:all) do
-    Config.register Config::FLUENTD do
+    Config.register Config::FLUENTD_CLIENT do
       mock = double
       allow(mock).to receive(:post)
       mock
     end
 
+    Config.register Config::FLUENTD do
+      Rforward::Uploaders::FluentdForward.new
+    end
+
+    Config.instance.current_uploader = Config::FLUENTD
   end
   describe DirectoryProcessor do
     context 'invalid path' do
       let(:invalid_path) { 'sadfad+asdfasd' }
-      let(:result) { DirectoryProcessor.call invalid_path, '.log' }
+      let(:result) { DirectoryProcessor.call invalid_path }
       it 'case 1' do
         expect {result }.to raise_error WrongPathEx
       end
@@ -18,7 +23,7 @@ RSpec.describe Rforward do
 
     context 'valid path', :focus do
       let(:valid_path) { fixture_path }
-      let(:result) { DirectoryProcessor.call valid_path, '.log' }
+      let(:result) { DirectoryProcessor.call valid_path }
       it 'case 1' do
         expect(result).to be_a(Array)
       end

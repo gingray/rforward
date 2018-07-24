@@ -13,3 +13,11 @@ class ConfigNotFoundEx < BaseRforwardEx
   end
 end
 
+class NoUploaderSelected < BaseRforwardEx
+  def initialize uploader
+    msg = "Uploader can't be blank" if uploader.nil? || uploader.empty?
+    msg = "Unsupported uploader '#{uploader}'" unless msg
+    super(msg)
+  end
+end
+

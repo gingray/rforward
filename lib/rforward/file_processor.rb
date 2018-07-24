@@ -1,14 +1,14 @@
 class FileProcessor
-  attr_accessor :filepath, :line_processor
+  attr_accessor :filepath, :uploader
 
-  def initialize filepath, line_processor
-    @filepath, @line_processor = filepath, line_processor
+  def initialize filepath, uploader
+    @filepath, @uploader = filepath, uploader
   end
 
   def call
     RLogger.instance.info "start working on #{filepath}"
     File.readlines(filepath).each do |line|
-      line_processor.call line
+      uploader.call line
     end
     Stat.instance.files_current += 1
     RLogger.instance.info "finish working on #{filepath}"
@@ -26,7 +26,8 @@ class FileProcessor
   end
 
   def self.call filepath
-    processor = FileProcessor.new filepath, FFluentdLine.new
+    uploader = Config.resolve Config.instance.current_uploader
+    processor = FileProcessor.new filepath, uploader
     processor.call
   end
 end

@@ -28,5 +28,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "thor", "~> 0.20"
   spec.add_dependency "fluent-logger"
   spec.add_dependency "dry-container"
-
+  spec.add_dependency "elasticsearch"
 end
