@@ -12,6 +12,7 @@ RSpec.describe Rforward do
 
     Config.instance.current_uploader = Config::FLUENTD
   end
+
   describe DirectoryProcessor do
     context 'invalid path' do
       let(:invalid_path) { 'sadfad+asdfasd' }

@@ -1,7 +1,7 @@
 require 'fluent-logger'
 module Rforward
   module Uploaders
-    class FluentdForward
+    class FluentdForward < Base
       attr_accessor :client
 
       def initialize

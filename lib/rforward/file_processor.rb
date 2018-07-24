@@ -7,9 +7,11 @@ class FileProcessor
 
   def call
     RLogger.instance.info "start working on #{filepath}"
+    uploader.before_start
     File.readlines(filepath).each do |line|
       uploader.call line
     end
+    uploader.after_finish
     Stat.instance.files_current += 1
     RLogger.instance.info "finish working on #{filepath}"
     RLogger.instance.stat

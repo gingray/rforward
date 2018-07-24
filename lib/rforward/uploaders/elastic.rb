@@ -1,6 +1,6 @@
 module Rforward
   module Uploaders
-    class Elastic
+    class Elastic < Base
       attr_accessor :client
 
       def initialize
@@ -27,6 +27,13 @@ module Rforward
         Stat.instance.failed += 1
         RLogger.instance.error "(#{e.message}) (line: #{line})"
         false
+      end
+
+      def after_finish
+        if @buffer.size > 0
+          @client.bulk body: @buffer
+          @buffer = []
+        end
       end
 
       def index_name record
